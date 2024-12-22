@@ -12,7 +12,7 @@ const EditBlog = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/posts/${id}`);
+        const response = await axios.get(`https://blog-project-backend-nq7y.onrender.com/api/posts/${id}`);
         setTitle(response.data.title);
         setContent(response.data.content);
         setLoading(false);
@@ -30,7 +30,7 @@ const EditBlog = () => {
 
     try {
       const updatedPost = { title, content };
-      await axios.put(`http://localhost:5000/api/posts/${id}`, updatedPost);
+      await axios.put(`https://blog-project-backend-nq7y.onrender.com/api/posts/${id}`, updatedPost);
       navigate(`/posts/${id}`); // Navigate back to the post detail page
     } catch (err) {
       console.error('Error updating post:', err);

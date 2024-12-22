@@ -12,7 +12,7 @@ const BlogList = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/posts');
+        const response = await axios.get('https://blog-project-backend-nq7y.onrender.com/api/posts');
         setPosts(response.data);
         setVisiblePosts(response.data.slice(0, postsPerPage));
       } catch (err) {
@@ -33,7 +33,7 @@ const BlogList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/posts/${id}`);
+      await axios.delete(`https://blog-project-backend-nq7y.onrender.com/api/posts/${id}`);
       setPosts(posts.filter((post) => post._id !== id));
       setVisiblePosts(visiblePosts.filter((post) => post._id !== id));
     } catch (err) {

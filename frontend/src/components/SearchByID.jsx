@@ -9,7 +9,7 @@ const BlogDetails = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/posts/${id}`);
+        const response = await axios.get(`https://blog-project-backend-nq7y.onrender.com/api/posts/${id}`);
         console.log(response);
         setPost(response.data);
       } catch (err) {

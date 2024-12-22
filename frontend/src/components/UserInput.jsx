@@ -9,7 +9,7 @@ const BlogForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/api/posts', {
+      const response = await axios.post('https://blog-project-backend-nq7y.onrender.com/api/posts', {
         title,
         content,
       });
