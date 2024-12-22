@@ -52,7 +52,7 @@ const BlogList = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-3xl font-semibold mb-4">All Blog Posts</h1>
+      <h1 className="text-3xl font-semibold mb-4 ">All Blog Posts</h1>
 
       {/* Search bar */}
       <div className="mb-4">
@@ -83,16 +83,16 @@ const BlogList = () => {
               <div className="flex space-x-4 mt-2">
                 <button
                   onClick={() => handleReadMore(post._id)}
-                  className="px-4 py-2 text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+                  className="px-4 py-2 text-white bg-emerald-500 rounded-lg hover:bg-emerald-600"
                 >
                   Read More
                 </button>
                 <button
-                  onClick={() => console.log(`Edit post with id: ${post._id}`)}
-                  className="px-4 py-2 text-white bg-green-500 rounded-lg hover:bg-green-600"
-                >
-                  Edit
-                </button>
+                  onClick={() => navigate(`/posts/edit/${post._id}`)} // Navigate to the edit page
+                      className="px-4 py-2 text-white bg-slate-400 rounded-lg hover:bg-slate-500"
+                          >
+                         Edit
+                        </button>
                 <button
                   onClick={() => handleDelete(post._id)}
                   className="px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600"
