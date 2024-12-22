@@ -1,34 +1,37 @@
-const axios = require('axios');
-require('dotenv').config();
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
-console.log(process.env.TEXTRAZOR_API_KEY);
-// Function to generate summary using TextRazor API
-const generateSummary = async (content) => {
+// Initialize the client with your API key
+const genAI = new GoogleGenerativeAI({
+  apiKey: 'AIzaSyCkhZdfemYkpukVbvztC5ogWL3rfdtmATU', // Replace with your actual API key
+});
+
+async function generateSummary(text) {
   try {
-    const response = await axios.post(
-      'https://api.textrazor.com',
-      {
-        text: content,  // Text you want to summarize
-        'extractors': 'entities,topics',  // Requesting for summary along with entities and topics
-      },
-      {
-        headers: {
-          'x-textrazor-key': process.env.TEXTRAZOR_API_KEY , // Use your TextRazor API key
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      }
-    );
-    console.log('TextRazor Response:', response.data); 
-    // Check if the response has summary data
-    if (response.data.response && response.data.response.summaries) {
-      return response.data.response.summaries[0].summary.trim(); // Return the first summary from the response
+    // Use the correct method for text generation
+    const response = await genAI.generateText({
+      model: 'models/text-bison-001-summarization', // Adjust the model name as needed
+      prompt: `Summarize the following text: ${text}`,
+    });
+
+    // Extract the response text
+    if (response && response.candidates && response.candidates.length > 0) {
+      return response.candidates[0].output;
     } else {
-      throw new Error('No summary returned from TextRazor');
+      throw new Error('No candidates returned in the response.');
     }
-  } catch (err) {
-    console.error('Error generating summary:', err.response ? err.response.data : err.message);
-    return 'Summary could not be generated';
+  } catch (error) {
+    console.error('Error generating summary:', error.message);
+    // Handle specific error types (e.g., API rate limits, invalid API key)
+    if (error.code === 429) {
+      console.error('API rate limit exceeded. Please retry later.');
+    }
+    return null;
   }
-};
+}
+
+// Example usage
+generateSummary('Fictional Excerpt:"The old woman sat on the park bench, her gaze fixed on the pigeons pecking at crumbs. A melancholic sigh escaped her lips as she remembered the life she once had, filled with laughter and love. Now, she was alone, her memories her only companions. The city noises faded into a distant hum, and she drifted off, lost in a sea of forgotten dreams.').then((summary) => {
+  console.log('Generated Summary:', summary);
+});
 
 module.exports = { generateSummary };
