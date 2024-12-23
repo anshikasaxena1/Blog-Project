@@ -1,0 +1,171 @@
+Documentation of the Project- Blog Post
+
+BlogPost Place
+
+A full-stack blogging platform where users can create, read, update, and delete blog posts. The app features a search bar, summarization, and dynamic navigation for better user experience.
+
+Link for the app: https://blog-project-frontend-gol2.onrender.com
+Table of Contents
+Project Overview
+Features
+Tech Stack
+Installation
+Usage
+API Endpoints
+Folder Structure
+Future Improvements
+Project Overview
+BlogPost Place is a blogging platform that allows users to:
+Browse blog posts with a search feature.
+Create new blog posts.
+Edit existing blog posts.
+Delete unwanted blog posts.
+Navigate through posts.
+See the summary of any post.
+The app is styled with Tailwind CSS and features smooth, aesthetic UI design.
+Features
+Responsive Design: Ensures optimal performance on mobile, tablet, and desktop devices.
+CRUD Operations: Full control over creating, updating, and deleting blogs.
+Search Functionality: Search for blog posts by title.
+Dynamic Routing: Navigate to detailed blog pages and edit pages.
+Backend Integration: Data stored and managed using a RESTful API.
+Summarization: summarizes the blog using generative AI.
+
+
+Tech Stack
+Frontend
+React
+React Router
+Axios
+Tailwind CSS
+Backend
+Node.js
+Express.js
+MongoDB (Hosted on Render)
+Installation
+Prerequisites
+Node.js installed on your system.
+MongoDB Atlas or local MongoDB setup.
+Git installed for cloning the repository.
+Steps
+Clone the repository:
+bash
+Copy code
+git clone <repository-url>
+cd BlogProject
+
+
+Install dependencies for both frontend and backend:
+bash
+Copy code
+# For the frontend
+cd frontend
+npm install
+
+# For the backend
+cd ../backend
+npm install
+
+
+Set up the .env file in the server folder with:
+makefile
+Copy code
+MONGO_URI=your_mongodb_uri
+PORT=your_desired_port
+
+
+Start the application:
+bash
+Copy code
+# Run the backend
+cd backend
+npm start
+
+# Run the frontend
+cd ../frontend
+npm start
+
+Open the app in your browser
+
+Usage
+Navigating the App
+Home Page:
+Lists all blog posts with a search bar at the top for easy filtering.
+Blogs are displayed, with desired buttons.
+Create Blog:
+Click on the "Create New Blog" button to add a new blog post.
+Fill in the title and content in the form and submit to create the blog.
+Read Blog:
+Click "Read More" on any blog post to view its details.
+On the detailed blog page, you'll see a summary of the blog post generated using Generative AI (Gemini API).
+The summary provides a quick, concise overview of the content for users who want a snapshot of the blog.
+Full blog content is also displayed above the summary.
+Edit Blog:
+Click the "Edit" button on any blog post to modify its content.
+Update the title or content using the form and submit changes.
+Delete Blog:
+Click the "Delete" button on a blog post to remove it permanently.
+
+API Endpoints Documentation
+Blog Posts
+Get All Posts
+Endpoint: GET /api/posts
+Description: Fetches all blog posts.
+Get a Single Post
+Endpoint: GET /api/posts/:id
+Description: Fetches details of a specific blog post by ID.
+Create a New Post
+Endpoint: POST /api/posts
+Description: Creates a new blog post.
+Update a Post
+Endpoint: PUT /api/posts/:id
+Description: Updates an existing blog post by ID.
+Delete a Post
+Endpoint: DELETE /api/posts/:id
+Description: Deletes a specific blog post by ID.
+AI-Generated Summaries
+Generate Summary
+Endpoint: POST /api/summary
+Description: Generates a summary for a blog post using Gemini AI.
+Folder Structure
+BlogProject/
+│
+├── frontend/              # React Frontend
+│   ├── src/
+│   │   ├── components/  # Reusable components
+│   │   ├── components/       # Page components
+│   │   ├── App.js       # Main app component
+│   │   ├──  index.html    # Entry point
+│   │   ├── index.css  # Tailwind configuration
+│
+├── Backend/              # Node.js Backend
+│   ├── models/          # Mongoose schemas
+│   ├── routes/          # API routes
+│   ├── server.js        # Entry point
+│
+└── README.md            # Project documentation
+
+
+
+Future Improvements
+Add user authentication for secure blog management.
+Implement categories or tags for blog filtering.
+Integrate a rich-text editor for formatting blog content.
+Add comments and likes functionality.
+Enhance UI with animations and additional styling
+Thankyou for reading, have a happy day :) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
