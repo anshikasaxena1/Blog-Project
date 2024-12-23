@@ -1,9 +1,7 @@
-
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const dotenv = require('dotenv');
-
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
@@ -14,16 +12,14 @@ app.use(express.json());  // To parse incoming JSON data
 const mongoURI = process.env.MONGO_URI ;
 // Connect to MongoDB
 
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => {
+mongoose.connect(mongoURI).then(() => {
   console.log('Connected to MongoDB');
 }).catch((error) => {
   console.log('Error connecting to MongoDB:', error);
 });
 
-const postRoutes = require('./routes/Posts'); // Import routes
+
+import postRoutes from './routes/Posts.js'; // Import routes
 app.use('/api/posts', postRoutes); // Set up the post routes
 
 const PORT = process.env.PORT || 5000;

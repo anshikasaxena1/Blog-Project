@@ -1,7 +1,8 @@
 // backend/routes/posts.js
-const express = require('express');
-const Post = require('../models/BlogPost');
-const { generateSummary } = require('../utils/summaryGen'); // We'll create this helper function later
+import express from 'express';
+import Post from '../models/BlogPost.js';
+
+import { generateSummary } from '../utils/summaryGen.js' // We'll create this helper function later
 
 const router = express.Router();
 
@@ -72,6 +73,24 @@ router.put('/:id', async (req, res) => {
     res.status(500).json({ message: 'Error updating post', error: err });
   }
 });
+router.get('/summary/:id', async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    // Use the stored summary or generate a new one dynamically
+    let summaryy = post.summary;
+    // if (!summary) {
+    //   summary = await generateSummary(post.content); // Generate summary dynamically
+    // }
+
+    res.status(200).json({ summaryy });
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching summary', error: err });
+  }
+});
 
 // Delete a post
 router.delete('/:id', async (req, res) => {
@@ -86,4 +105,4 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

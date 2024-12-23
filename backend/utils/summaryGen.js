@@ -1,34 +1,27 @@
-const axios = require('axios');
-require('dotenv').config();
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-console.log(process.env.TEXTRAZOR_API_KEY);
-// Function to generate summary using TextRazor API
-const generateSummary = async (content) => {
+async function generateSummary(content) {
   try {
-    const response = await axios.post(
-      'https://api.textrazor.com',
-      {
-        text: content,  // Text you want to summarize
-        'extractors': 'entities,topics',  // Requesting for summary along with entities and topics
-      },
-      {
-        headers: {
-          'x-textrazor-key': process.env.TEXTRAZOR_API_KEY , // Use your TextRazor API key
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      }
-    );
-    console.log('TextRazor Response:', response.data); 
-    // Check if the response has summary data
-    if (response.data.response && response.data.response.summaries) {
-      return response.data.response.summaries[0].summary.trim(); // Return the first summary from the response
-    } else {
-      throw new Error('No summary returned from TextRazor');
-    }
-  } catch (err) {
-    console.error('Error generating summary:', err.response ? err.response.data : err.message);
-    return 'Summary could not be generated';
-  }
-};
+    const genAI = new GoogleGenerativeAI("AIzaSyCzB_V2LWcUrA2RkH77BBltH1JqWWgiALw");
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-module.exports = { generateSummary };
+    const prompt = `Summarize the following content:\n\n${content}`;
+    const result = await model.generateContent(prompt);
+
+    // Extract the summary text
+    const summary =
+      result?.response?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+
+    if (!summary) {
+      throw new Error("Failed to extract summary text from API response");
+    }
+
+    console.log("Extracted Summary:", summary);
+    return summary; // Return the plain text summary
+  } catch (error) {
+    console.error("Error during summarization:", error);
+    throw new Error("Error during summarization");
+  }
+}
+
+export { generateSummary };

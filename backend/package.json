@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+     
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,5 +19,6 @@
     "express": "^4.21.2",
     "mongoose": "^8.9.2",
     "openai": "^4.77.0"
-  }
+  },
+  "type": "module"
 }

@@ -12,6 +12,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<AllBlogs />} />
         <Route path="/create" element={<UserInput />} />
+        
         <Route path="/post/:id" element={<SearchById />} />
         <Route path="/posts/edit/:id" element={<EditBlog />} />
         <Route path="/posts/:id" element={<BlogDetails />} />
