@@ -34,7 +34,7 @@ const BlogDetails = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md mt-8">
+    <div className="max-w-3xl mx-auto p-6 bg-orange-50 rounded-lg shadow-md mt-8">
       {post ? (
         <>
           {/* Blog Title */}
@@ -64,7 +64,7 @@ const BlogDetails = () => {
 
           {/* Show Summary */}
           {isSummaryVisible && summary && (
-            <div className="mt-6 p-4 bg-gray-100 rounded-md">
+            <div className="mt-6 p-4 bg-white rounded-md">
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">Summary</h2>
               <p>{summary}</p>
             </div>
